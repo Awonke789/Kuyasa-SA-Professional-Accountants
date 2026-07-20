@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Kuyasa SA - Book Appointment</title>
+  <meta name="description" content="Book an appointment with Kuyasa SA">
+  
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center me-auto">
+        <img src="assets/img/Kuyasa-logo.png" alt="Company Logo" style="width: 100px;">
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-getstarted" href="index.html#contact">Get Your Free Consultation</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="booking" class="contact section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Book an Appointment</h2>
+        <p>Schedule a consultation with our team</p>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="contact-form-block">
+              <h3>Request an Appointment</h3>
+              
+              <form id="appointmentForm">
+                <div class="row gy-3">
+                  <div class="col-md-6">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Your Full Name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Your Email Address" required>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="tel" name="phone" id="phone" class="form-control" placeholder="Your Phone Number" required>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="date" name="date" id="appointmentDate" class="form-control" required>
+                  </div>
+                  <div class="col-md-6">
+                    <select name="service" id="service" class="form-control" required>
+                      <option value="">Select Service</option>
+                      <option value="financial-statements">Financial Statements</option>
+                      <option value="bookkeeping">Bookkeeping</option>
+                      <option value="management-accounts">Management Accounts</option>
+                      <option value="payroll">Payroll</option>
+                      <option value="company-registration">Company Registration</option>
+                      <option value="compliance-audits">Compliance Audits</option>
+                      <option value="sars-compliance">SARS Compliance</option>
+                      <option value="consulting">Consulting</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <select name="time" id="time" class="form-control" required>
+                      <option value="">Preferred Time</option>
+                      <option value="9am-10am">9:00 AM - 10:00 AM</option>
+                      <option value="10am-11am">10:00 AM - 11:00 AM</option>
+                      <option value="11am-12pm">11:00 AM - 12:00 PM</option>
+                      <option value="12pm-1pm">12:00 PM - 1:00 PM</option>
+                      <option value="2pm-3pm">2:00 PM - 3:00 PM</option>
+                      <option value="3pm-4pm">3:00 PM - 4:00 PM</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <textarea class="form-control" name="message" rows="4" placeholder="Tell us about your needs (optional)"></textarea>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button type="submit">Request Appointment</button>
+                  </div>
+                </div>
+              </form>
+              <div id="successMessage" style="display: none; text-align: center; margin-top: 20px; padding: 15px; background: #d4edda; color: #155724; border-radius: 5px;">
+                <strong>Thank you!</strong> Your appointment request has been sent. We will contact you within 24 hours.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container copyright text-center mt-4">
+      <p>© 2026 All rights reserved | Kuyasa SA Professional Accountants</p>
+    </div>
+  </footer>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    AOS.init({ duration: 600, once: true });
+    
+    // Date validation
+    const dateInput = document.getElementById('appointmentDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    dateInput.addEventListener('input', function(e) {
+      const selectedDate = new Date(e.target.value);
+      const dayOfWeek = selectedDate.getDay();
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        alert('Weekends are not available. Please select a weekday (Monday to Friday).');
+        dateInput.value = '';
+      }
+    });
+
+    // Get form and fields
+    const form = document.getElementById('appointmentForm');
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const phoneField = document.getElementById('phone');
+    const serviceField = document.getElementById('service');
+    const timeField = document.getElementById('time');
+
+    // Function to show error
+    function setError(field, message) {
+      field.classList.add('is-invalid');
+      let errorDiv = field.nextElementSibling;
+      if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+        errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.color = '#dc3545';
+        errorDiv.style.fontSize = '13px';
+        errorDiv.style.marginTop = '5px';
+        errorDiv.style.fontWeight = '500';
+        field.parentNode.insertBefore(errorDiv, field.nextSibling);
+      }
+      errorDiv.innerText = message;
+      errorDiv.style.display = 'block';
+    }
+
+    function clearError(field) {
+      field.classList.remove('is-invalid');
+      const errorDiv = field.nextElementSibling;
+      if (errorDiv && errorDiv.classList.contains('error-message')) {
+        errorDiv.style.display = 'none';
+      }
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateField(field, type) {
+      const value = field.value.trim();
+      let isValid = true;
+      let errorMsg = '';
+
+      if (type === 'name') {
+        isValid = value !== '';
+        errorMsg = 'Please enter your full name';
+      } else if (type === 'email') {
+        isValid = value !== '' && isValidEmail(value);
+        errorMsg = 'Please enter a valid email address (e.g., name@example.com)';
+      } else if (type === 'phone') {
+        isValid = value !== '';
+        errorMsg = 'Please enter your phone number';
+      } else if (type === 'service') {
+        isValid = value !== '';
+        errorMsg = 'Please select a service';
+      } else if (type === 'time') {
+        isValid = value !== '';
+        errorMsg = 'Please select a preferred time';
+      }
+
+      if (isValid) {
+        clearError(field);
+      } else {
+        setError(field, errorMsg);
+      }
+      return isValid;
+    }
+
+    // Add event listeners for real-time validation
+    nameField.addEventListener('input', () => validateField(nameField, 'name'));
+    emailField.addEventListener('input', () => validateField(emailField, 'email'));
+    phoneField.addEventListener('input', () => validateField(phoneField, 'phone'));
+    serviceField.addEventListener('change', () => validateField(serviceField, 'service'));
+    timeField.addEventListener('change', () => validateField(timeField, 'time'));
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const isNameValid = validateField(nameField, 'name');
+      const isEmailValid = validateField(emailField, 'email');
+      const isPhoneValid = validateField(phoneField, 'phone');
+      const isServiceValid = validateField(serviceField, 'service');
+      const isTimeValid = validateField(timeField, 'time');
+      
+      if (isNameValid && isEmailValid && isPhoneValid && isServiceValid && isTimeValid) {
+        form.style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+      } else {
+        alert('Please fix the errors in the form before submitting.');
+        const firstError = document.querySelector('.is-invalid');
+        if (firstError) firstError.focus();
+      }
+    });
+  </script>
+</body>
+</html>
